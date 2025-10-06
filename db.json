@@ -1,0 +1,14 @@
+{
+  "content": {
+    "homepage": {},
+    "about": {},
+    "services": {},
+    "portfolio": [],
+    "contact": {}
+  },
+  "contactRequests": [],
+  "adminUser": {
+    "username": "admin",
+    "password": "admin"
+  }
+}

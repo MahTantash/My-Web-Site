@@ -1,0 +1,64 @@
+// Prisma schema for business website backend
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String   // hashed
+  createdAt DateTime @default(now())
+}
+
+model Content {
+  id        Int      @id @default(autoincrement())
+  homepage  Json
+  about     Json
+  contact   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  order       Int
+  createdAt   DateTime @default(now())
+}
+
+model PortfolioProject {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  order       Int
+  images      Image[]
+  createdAt   DateTime @default(now())
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  project   PortfolioProject? @relation(fields: [projectId], references: [id])
+  projectId Int?
+  uploadedAt DateTime @default(now())
+}
+
+model ContactRequest {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  service   String?
+  message   String
+  date      DateTime @default(now())
+}
+
+// Session table for connect-pg-simple (optional, can be managed outside Prisma)
